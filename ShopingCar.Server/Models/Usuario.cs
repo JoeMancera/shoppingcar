@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace ShopingCar.Web.Models
+namespace ShopingCar.Server.Models
 {
     public class Usuario
     {

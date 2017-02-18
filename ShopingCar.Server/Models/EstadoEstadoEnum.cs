@@ -1,4 +1,4 @@
-﻿namespace ShopingCar.Web.Models
+﻿namespace ShopingCar.Server.Models
 {
     public enum EstadoEstadoEnum
     {

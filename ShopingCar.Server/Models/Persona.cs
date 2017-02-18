@@ -4,14 +4,14 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace ShopingCar.Web.Models
+namespace ShopingCar.Server.Models
 {
     public class Persona
     {
         public int Id { get; set; }
 
         #region Nombre Persona
-        [Display(Name ="Nombre")]
+        [Display(Name = "Nombre")]
         [Required]
         public string Nombre { get; set; }
         #endregion
@@ -35,6 +35,5 @@ namespace ShopingCar.Web.Models
         #region Relacion con Usuario
         public virtual Usuario Usuarios { get; set; }
         #endregion
-
     }
 }
