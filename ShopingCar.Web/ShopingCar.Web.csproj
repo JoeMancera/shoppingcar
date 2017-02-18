@@ -160,16 +160,24 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APIs\DetallePedidosAPIController.cs" />
+    <Compile Include="APIs\PedidosAPIController.cs" />
+    <Compile Include="APIs\PersonasAPIController.cs" />
+    <Compile Include="APIs\ProductosAPIController.cs" />
+    <Compile Include="APIs\UsuariosAPIController.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DetallePedido.cs" />
     <Compile Include="Models\EstadoEstadoEnum.cs" />
+    <Compile Include="Models\Home.cs" />
     <Compile Include="Models\Pedido.cs" />
     <Compile Include="Models\Persona.cs" />
     <Compile Include="Models\Producto.cs" />
+    <Compile Include="Models\ShopingCarWebContext.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -182,6 +190,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Home\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -190,9 +199,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="APIs\" />
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
