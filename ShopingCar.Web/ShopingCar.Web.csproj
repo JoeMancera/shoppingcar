@@ -187,6 +187,13 @@
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\" />
     <Folder Include="Models\" />
+    <Folder Include="Util\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ShopingCar.Server\ShopingCar.Server.csproj">
+      <Project>{46bdddb0-94f8-4fec-b415-878517cd14e3}</Project>
+      <Name>ShopingCar.Server</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
