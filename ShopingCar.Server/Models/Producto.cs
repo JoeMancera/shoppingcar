@@ -7,14 +7,6 @@ namespace ShopingCar.Server.Models
 {
     public class Producto
     {
-        public int Id { get; set; }
-
-        #region Nombre del Producto
-        public string Nombre { get; set; }
-        #endregion
-
-        #region Precio
-        public float Precio { get; set; }
-        #endregion
+       
     }
 }

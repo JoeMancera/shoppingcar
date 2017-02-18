@@ -165,6 +165,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DetallePedido.cs" />
+    <Compile Include="Models\EstadoEstadoEnum.cs" />
+    <Compile Include="Models\Pedido.cs" />
+    <Compile Include="Models\Persona.cs" />
+    <Compile Include="Models\Producto.cs" />
+    <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -184,16 +190,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="APIs\" />
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
-    <Folder Include="Util\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ShopingCar.Server\ShopingCar.Server.csproj">
-      <Project>{46bdddb0-94f8-4fec-b415-878517cd14e3}</Project>
-      <Name>ShopingCar.Server</Name>
-    </ProjectReference>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
