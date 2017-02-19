@@ -12,6 +12,47 @@ namespace ShopingCar.Server
     {
         ShoppingDataDataContext BDUsuario = new ShoppingDataDataContext();
 
+        #region Agregra Producto
+        public wsSQLResult CrearProducto(Stream JSONdataStream)
+        {
+            wsSQLResult result = new wsSQLResult();
+
+            try
+            {
+                StreamReader reader = new StreamReader(JSONdataStream);
+                string JSONdata = reader.ReadToEnd();
+                JavaScriptSerializer jss = new JavaScriptSerializer();
+                Producto_ obj = jss.Deserialize<Producto_>(JSONdata);
+
+                if (obj == null)
+                {
+                    result.WasSucceful = 0;
+                    result.Exception = "No se pudo deserializar el JSON";
+                    return result;
+                }
+
+                Producto newProduct = new Producto
+                {
+                    Nombre = obj.Nombre,
+                    Precio = Convert.ToDouble(obj.Precio),
+                };
+
+                BDUsuario.Producto.InsertOnSubmit(newProduct);
+                BDUsuario.SubmitChanges();
+
+                result.WasSucceful = 1;
+                result.Exception = "";
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.WasSucceful = 0;
+                result.Exception = ex.Message;
+                return result;
+            }
+        }
+        #endregion
+
         #region Buscar Cliente por correo
         public List<Cliente_> FiltradoPorCorreo(string correo)
         {
@@ -30,7 +71,7 @@ namespace ShopingCar.Server
         }
         #endregion
 
-        #region Guardar Registro
+        #region Crear Usuario
         public wsSQLResult CrearUsuario(Stream JSONdataStream)
         {
             wsSQLResult result = new wsSQLResult();
@@ -40,9 +81,9 @@ namespace ShopingCar.Server
 
                 string JSONdata = reader.ReadToEnd();
                 JavaScriptSerializer jss = new JavaScriptSerializer();
-                Cliente_ cust = jss.Deserialize<Cliente_>(JSONdata);
+                Cliente_ obj = jss.Deserialize<Cliente_>(JSONdata);
 
-                if (cust == null)
+                if (obj == null)
                 {
                     result.WasSucceful = 0;
                     result.Exception = "No se pudo deserializar el JSON a Cliente_";
@@ -51,13 +92,13 @@ namespace ShopingCar.Server
 
                 Cliente newCustomer = new Cliente
                 {
-                    Nombres = cust.Nombres,
-                    Correo = cust.Correo,
-                    Clave = cust.Clave
+                    Nombres = obj.Nombres,
+                    Correo = obj.Correo,
+                    Clave = obj.Clave
                 };
 
                 
-                if (FiltradoPorCorreo(cust.Correo).Count != 0)
+                if (FiltradoPorCorreo(obj.Correo).Count != 0)
                 {
                     result.WasSucceful = 0;
                     result.Exception = "Correo ya existe";
@@ -137,6 +178,16 @@ namespace ShopingCar.Server
             }
         }
         #endregion
-        
+
+        #region Serializer
+        public JavaScriptSerializer Serializer(Stream JSONdataStream, TypedReference Tipo)
+        {
+            StreamReader reader = new StreamReader(JSONdataStream);
+            string JSONdata = reader.ReadToEnd();
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+
+            return jss;
+        }
+        #endregion
     }
 }

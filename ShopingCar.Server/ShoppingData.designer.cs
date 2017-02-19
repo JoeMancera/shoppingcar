@@ -214,7 +214,7 @@ namespace ShopingCar.Server
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Clave", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Clave", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
 		public string Clave
 		{
 			get
@@ -290,9 +290,7 @@ namespace ShopingCar.Server
 		
 		private string _Nombre;
 		
-		private string _Precio;
-		
-		private string _Path;
+		private double _Precio;
 		
 		private EntitySet<DetallePedido> _DetallePedido;
 		
@@ -304,10 +302,8 @@ namespace ShopingCar.Server
     partial void OnIdChanged();
     partial void OnNombreChanging(string value);
     partial void OnNombreChanged();
-    partial void OnPrecioChanging(string value);
+    partial void OnPrecioChanging(double value);
     partial void OnPrecioChanged();
-    partial void OnPathChanging(string value);
-    partial void OnPathChanged();
     #endregion
 		
 		public Producto()
@@ -336,7 +332,7 @@ namespace ShopingCar.Server
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombre", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombre", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
 		public string Nombre
 		{
 			get
@@ -356,8 +352,8 @@ namespace ShopingCar.Server
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Precio", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
-		public string Precio
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Precio", DbType="Float NOT NULL")]
+		public double Precio
 		{
 			get
 			{
@@ -372,26 +368,6 @@ namespace ShopingCar.Server
 					this._Precio = value;
 					this.SendPropertyChanged("Precio");
 					this.OnPrecioChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Path", DbType="VarChar(MAX)")]
-		public string Path
-		{
-			get
-			{
-				return this._Path;
-			}
-			set
-			{
-				if ((this._Path != value))
-				{
-					this.OnPathChanging(value);
-					this.SendPropertyChanging();
-					this._Path = value;
-					this.SendPropertyChanged("Path");
-					this.OnPathChanged();
 				}
 			}
 		}
@@ -784,6 +760,8 @@ namespace ShopingCar.Server
 		
 		private int _EstadoId;
 		
+		private System.DateTime _FechaPedido;
+		
 		private EntitySet<DetallePedido> _DetallePedido;
 		
 		private EntityRef<Estado> _Estado;
@@ -800,6 +778,8 @@ namespace ShopingCar.Server
     partial void OnClienteIdChanged();
     partial void OnEstadoIdChanging(int value);
     partial void OnEstadoIdChanged();
+    partial void OnFechaPedidoChanging(System.DateTime value);
+    partial void OnFechaPedidoChanged();
     #endregion
 		
 		public Pedido()
@@ -874,6 +854,26 @@ namespace ShopingCar.Server
 					this._EstadoId = value;
 					this.SendPropertyChanged("EstadoId");
 					this.OnEstadoIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaPedido", DbType="DateTime NOT NULL")]
+		public System.DateTime FechaPedido
+		{
+			get
+			{
+				return this._FechaPedido;
+			}
+			set
+			{
+				if ((this._FechaPedido != value))
+				{
+					this.OnFechaPedidoChanging(value);
+					this.SendPropertyChanging();
+					this._FechaPedido = value;
+					this.SendPropertyChanged("FechaPedido");
+					this.OnFechaPedidoChanged();
 				}
 			}
 		}

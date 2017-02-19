@@ -5,16 +5,15 @@
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Nombres" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="Correo" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="Clave" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Clave" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
       <Association Name="Cliente_Pedido" Member="Pedido" ThisKey="Id" OtherKey="ClienteId" Type="Pedido" />
     </Type>
   </Table>
   <Table Name="dbo.Producto" Member="Producto">
     <Type Name="Producto">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Nombre" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
-      <Column Name="Precio" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
-      <Column Name="Path" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Precio" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Association Name="Producto_DetallePedido" Member="DetallePedido" ThisKey="Id" OtherKey="ProductoId" Type="DetallePedido" />
     </Type>
   </Table>
@@ -40,6 +39,7 @@
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="ClienteId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="EstadoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FechaPedido" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Association Name="Pedido_DetallePedido" Member="DetallePedido" ThisKey="Id" OtherKey="PedidoId" Type="DetallePedido" />
       <Association Name="Estado_Pedido" Member="Estado" ThisKey="EstadoId" OtherKey="Id" Type="Estado" IsForeignKey="true" />
       <Association Name="Cliente_Pedido" Member="Cliente" ThisKey="ClienteId" OtherKey="Id" Type="Cliente" IsForeignKey="true" />

@@ -3,15 +3,14 @@ CREATE TABLE [dbo].[Cliente] (
     [Id]      INT     IDENTITY(1,1)       NOT NULL,
     [Nombres] VARCHAR (MAX)  NOT NULL,
     [Correo]  VARCHAR  (MAX) NOT NULL,
-    [Clave]   VARCHAR (50)   NOT NULL,
+    [Clave]   VARCHAR (max)   NOT NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 
 CREATE TABLE [dbo].[Producto] (
     [Id]     INT      IDENTITY(1,1)     NOT NULL,
-    [Nombre] VARCHAR (10)    NOT NULL,
-    [Precio] VARCHAR (10)    NOT NULL,
-    [Path]   VARCHAR (MAX) NULL,
+    [Nombre] VARCHAR (max)    NOT NULL,
+    [Precio] FLOAT    NOT NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 
@@ -25,7 +24,8 @@ CREATE TABLE [dbo].[Pedido] (
     [Id]        INT IDENTITY(1,1) NOT NULL,
     [ClienteId] INT NOT NULL,
     [EstadoId]  INT NOT NULL,
-    PRIMARY KEY CLUSTERED ([Id] ASC),
+	[FechaPedido] DATETIME DEFAULT (getdate()) NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC),	
     CONSTRAINT [FK_Pedido_ClienteId] FOREIGN KEY ([ClienteId]) REFERENCES [dbo].[Cliente] ([Id]),
     CONSTRAINT [FK_Estado_EstadoId] FOREIGN KEY ([EstadoId]) REFERENCES [dbo].[Estado] ([Id])
 );

@@ -13,6 +13,11 @@ namespace ShopingCar.Server
     [ServiceContract]
     public interface IShoppingServer
     {
+        #region Agregar Poducto
+        [OperationContract]
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "/CrearProducto")]
+        wsSQLResult CrearProducto(Stream JSONdataStream);
+        #endregion
 
         #region Guardar una persona
         [OperationContract]
@@ -83,7 +88,7 @@ namespace ShopingCar.Server
         public int Id { get; set; }
 
         [DataMember]
-        public int Nombre { get; set; }
+        public string Nombre { get; set; }
 
         [DataMember]
         public string Precio { get; set; }
