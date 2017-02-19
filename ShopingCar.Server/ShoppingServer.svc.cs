@@ -12,7 +12,7 @@ namespace ShopingCar.Server
     {
         ShoppingDataDataContext BDUsuario = new ShoppingDataDataContext();
 
-        #region Agregra Producto
+        #region Agregra Producto DB
         public wsSQLResult CrearProducto(Stream JSONdataStream)
         {
             wsSQLResult result = new wsSQLResult();
@@ -51,6 +51,9 @@ namespace ShopingCar.Server
                 return result;
             }
         }
+        #endregion
+
+        #region Agregar Producto al carrito
         #endregion
 
         #region Buscar Cliente por correo
@@ -165,6 +168,68 @@ namespace ShopingCar.Server
                 return result;
             }
 
+        }
+        #endregion
+
+        #region Crear un pedido
+        public wsSQLResult CrearPedido(Stream JSONdataStream)
+        {
+            wsSQLResult result = new wsSQLResult();
+
+            try
+            {
+                StreamReader reader = new StreamReader(JSONdataStream);
+
+                string JSONdata = reader.ReadToEnd();
+                JavaScriptSerializer jss = new JavaScriptSerializer();
+                Pedido_ objPedido = jss.Deserialize<Pedido_>(JSONdata);
+                DetallePedido_ objDetalle = jss.Deserialize<DetallePedido_>(JSONdata);
+
+                if (objPedido == null)
+                {
+                    result.WasSucceful = 0;
+                    result.Exception = "No se pudo deserializar el JSON a Pedido_";
+                    return result;
+                }
+
+                if (objDetalle == null)
+                {
+                    result.WasSucceful = 0;
+                    result.Exception = "No se pudo deserializar el JSON a Detalle_";
+                    return result;
+                }
+
+                Pedido newOrder = new Pedido()
+                {
+                    ClienteId = objPedido.ClienteId,
+                    FechaPedido = DateTime.Now,
+                    EstadoId = 1
+                };
+
+                BDUsuario.Pedido.InsertOnSubmit(newOrder);
+                BDUsuario.SubmitChanges();
+                var pedidoId = newOrder.Id;
+
+                DetallePedido newDetailOrder = new DetallePedido()
+                {
+                    PedidoId = pedidoId,
+                    ProductoId = objDetalle.ProductoId,
+                    Cantidad = objDetalle.Cantidad
+                };
+
+                BDUsuario.DetallePedido.InsertOnSubmit(newDetailOrder);
+                BDUsuario.SubmitChanges();
+
+                result.WasSucceful = 1;
+                result.Exception = "";
+                return result;
+            }
+            catch (Exception e)
+            {
+                result.WasSucceful = 0;
+                result.Exception = e.Message;
+                return result;
+            }
         }
         #endregion
 
