@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ShoppingCar" Class="ShoppingDataDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=S9S9S9S9S9\SQLEXPRESS;Initial Catalog=ShoppingCar;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="ShoppingCarConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Cliente" Member="Cliente">
+    <Type Name="Cliente">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Nombres" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Correo" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Clave" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Cliente_Pedido" Member="Pedido" ThisKey="Id" OtherKey="ClienteId" Type="Pedido" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Producto" Member="Producto">
+    <Type Name="Producto">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Precio" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Path" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Association Name="Producto_DetallePedido" Member="DetallePedido" ThisKey="Id" OtherKey="ProductoId" Type="DetallePedido" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DetallePedido" Member="DetallePedido">
+    <Type Name="DetallePedido">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PedidoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ProductoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Cantidad" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Producto_DetallePedido" Member="Producto" ThisKey="ProductoId" OtherKey="Id" Type="Producto" IsForeignKey="true" />
+      <Association Name="Pedido_DetallePedido" Member="Pedido" ThisKey="PedidoId" OtherKey="Id" Type="Pedido" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Estado" Member="Estado">
+    <Type Name="Estado">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Association Name="Estado_Pedido" Member="Pedido" ThisKey="Id" OtherKey="EstadoId" Type="Pedido" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Pedido" Member="Pedido">
+    <Type Name="Pedido">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ClienteId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EstadoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Pedido_DetallePedido" Member="DetallePedido" ThisKey="Id" OtherKey="PedidoId" Type="DetallePedido" />
+      <Association Name="Estado_Pedido" Member="Estado" ThisKey="EstadoId" OtherKey="Id" Type="Estado" IsForeignKey="true" />
+      <Association Name="Cliente_Pedido" Member="Cliente" ThisKey="ClienteId" OtherKey="Id" Type="Cliente" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

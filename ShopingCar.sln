@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopingCar.Web", "ShopingCar.Web\ShopingCar.Web.csproj", "{A720F434-F3E7-4894-8237-4E031523504B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopingCar.Server", "ShopingCar.Server\ShopingCar.Server.csproj", "{2C082593-BF65-4FDA-940D-0E4D44DCC111}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A720F434-F3E7-4894-8237-4E031523504B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A720F434-F3E7-4894-8237-4E031523504B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A720F434-F3E7-4894-8237-4E031523504B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A720F434-F3E7-4894-8237-4E031523504B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C082593-BF65-4FDA-940D-0E4D44DCC111}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C082593-BF65-4FDA-940D-0E4D44DCC111}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C082593-BF65-4FDA-940D-0E4D44DCC111}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C082593-BF65-4FDA-940D-0E4D44DCC111}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
