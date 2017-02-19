@@ -13,23 +13,20 @@ namespace ShopingCar.Server
         ShoppingDataDataContext BDUsuario = new ShoppingDataDataContext();
 
         #region Buscar Cliente por correo
-        public bool FiltradoPorCorreo(string correo)
+        public List<Cliente_> FiltradoPorCorreo(string correo)
         {
-            bool found = false;
             var result = from p in BDUsuario.Cliente
                        where p.Correo == correo
 
                        select new Cliente_
                        {
                            Correo = p.Correo,
+                           Clave = p.Clave
                        };
 
             int count = result.Count();
-
-            if (count != 0)
-                found = true;
             
-            return found;
+            return result.ToList();
         }
         #endregion
 
@@ -60,7 +57,7 @@ namespace ShopingCar.Server
                 };
 
                 
-                if (FiltradoPorCorreo(cust.Correo))
+                if (FiltradoPorCorreo(cust.Correo).Count != 0)
                 {
                     result.WasSucceful = 0;
                     result.Exception = "Correo ya existe";
@@ -83,5 +80,63 @@ namespace ShopingCar.Server
 
         }
         #endregion
+
+        #region Login User
+        public wsSQLResult LoginUsuario(Stream JSONdataStream)
+        {
+            wsSQLResult result = new wsSQLResult();
+
+            try
+            {
+                string queLaClave = "";
+                StreamReader reader = new StreamReader(JSONdataStream);
+
+                string JSONdata = reader.ReadToEnd();
+                JavaScriptSerializer jss = new JavaScriptSerializer();
+                Cliente_ obj = jss.Deserialize<Cliente_>(JSONdata);
+
+                if (obj == null)
+                {
+                    result.WasSucceful = 0;
+                    result.Exception = "No se pudo deserializar el JSON";
+                    return result;
+                }
+
+                var log = FiltradoPorCorreo(obj.Correo);
+                if (log.Count == 0)
+                {
+                    result.WasSucceful = 0;
+                    result.Exception = "Usuario y clave invalidos";
+                    return result;
+                }
+
+                var lista = log.ToList();
+                foreach (var i in lista)
+                {
+                    queLaClave = i.Clave;
+                }
+
+                if (queLaClave  != obj.Clave)
+                {
+                    result.WasSucceful = 0;
+                    result.Exception = "Usuario y clave invalidos";
+                    return result;
+                }
+                else
+                {
+                    result.WasSucceful = 1;
+                    result.Exception = "";
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                result.WasSucceful = 0;
+                result.Exception = ex.Message;
+                return result;
+            }
+        }
+        #endregion
+        
     }
 }

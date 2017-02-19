@@ -20,6 +20,11 @@ namespace ShopingCar.Server
         wsSQLResult CrearUsuario(Stream JSONdataStream);
         #endregion
 
+        #region Ingreso al aplictativo
+        [OperationContract]
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "/LoginUsuario")]
+        wsSQLResult LoginUsuario(Stream JSONdataStream);
+        #endregion
     }
 
 
