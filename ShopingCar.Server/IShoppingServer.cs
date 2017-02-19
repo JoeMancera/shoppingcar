@@ -19,6 +19,12 @@ namespace ShopingCar.Server
         wsSQLResult CrearProducto(Stream JSONdataStream);
         #endregion
 
+        #region Buscar y listar productos
+        [OperationContract]
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "/BuscarProductoNombre")]
+        List<Producto_> BuscarProductoNombre(Stream JSONdataStream);
+        #endregion
+
         #region Guardar una persona
         [OperationContract]
         [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "/CrearUsuario")]
@@ -91,7 +97,7 @@ namespace ShopingCar.Server
         public string Nombre { get; set; }
 
         [DataMember]
-        public string Precio { get; set; }
+        public double Precio { get; set; }
 
     }
 }

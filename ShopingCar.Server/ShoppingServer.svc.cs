@@ -71,6 +71,52 @@ namespace ShopingCar.Server
         }
         #endregion
 
+        #region  Buscar Producto
+        public List<Producto_> BuscarProductoNombre(Stream JSONdataStream)
+        {
+            List<Producto_> result = new List<Producto_>();
+
+            StreamReader reader = new StreamReader(JSONdataStream);
+            string JSONdata = reader.ReadToEnd();
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            Producto_ obj = jss.Deserialize<Producto_>(JSONdata);
+
+            if (obj == null)
+            {
+                return result.ToList();
+            }
+
+            if (obj.Nombre != null || obj.Nombre == "")
+            {
+                var list = from p in BDUsuario.Producto
+                             where (p.Nombre.Contains(obj.Nombre))
+
+                           select new Producto_
+                             {
+                                 Id =  p.Id,
+                                 Nombre = p.Nombre,
+                                 Precio = p.Precio,
+                             };
+                int count = list.Count();
+                return list.ToList();
+            }
+            else
+            {
+                var list = from p in BDUsuario.Producto
+
+                             select new Producto_
+                             {
+                                 Id = p.Id,
+                                 Nombre = p.Nombre,
+                                 Precio = p.Precio,
+                             };
+                int count = list.Count();
+                return list.ToList();
+            }
+
+        }
+        #endregion
+
         #region Crear Usuario
         public wsSQLResult CrearUsuario(Stream JSONdataStream)
         {
