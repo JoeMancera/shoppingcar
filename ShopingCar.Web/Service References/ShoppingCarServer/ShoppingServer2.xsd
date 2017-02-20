@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/ShopingCar.Server" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/ShopingCar.Server" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="wsSQLResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Exception" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="WasSucceful" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="wsSQLResult" nillable="true" type="tns:wsSQLResult" />
+  <xs:complexType name="ArrayOfProducto_">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Producto_" nillable="true" type="tns:Producto_" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfProducto_" nillable="true" type="tns:ArrayOfProducto_" />
+  <xs:complexType name="Producto_">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Nombre" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Precio" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Producto_" nillable="true" type="tns:Producto_" />
+  <xs:complexType name="ArrayOfDetallePedido_">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DetallePedido_" nillable="true" type="tns:DetallePedido_" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDetallePedido_" nillable="true" type="tns:ArrayOfDetallePedido_" />
+  <xs:complexType name="DetallePedido_">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cantidad" type="xs:int" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="PedidoId" type="xs:int" />
+      <xs:element minOccurs="0" name="Precio" type="xs:double" />
+      <xs:element minOccurs="0" name="Producto" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProductoId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DetallePedido_" nillable="true" type="tns:DetallePedido_" />
+  <xs:complexType name="ArrayOfPedido_">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Pedido_" nillable="true" type="tns:Pedido_" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPedido_" nillable="true" type="tns:ArrayOfPedido_" />
+  <xs:complexType name="Pedido_">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ClienteId" type="xs:int" />
+      <xs:element minOccurs="0" name="EstadoId" type="xs:int" />
+      <xs:element minOccurs="0" name="FechaPedido" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Pedido_" nillable="true" type="tns:Pedido_" />
+</xs:schema>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ShoppingServer" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:15847/ShoppingServer.svc?xsd=xsd1" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:15847/ShoppingServer.svc?xsd=xsd0" namespace="http://schemas.microsoft.com/Message" />
+      <xsd:import schemaLocation="http://localhost:15847/ShoppingServer.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:15847/ShoppingServer.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/ShopingCar.Server" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IShoppingServer_CrearProducto_InputMessage">
+    <wsdl:part name="parameters" element="tns:CrearProducto" />
+  </wsdl:message>
+  <wsdl:message name="IShoppingServer_CrearProducto_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CrearProductoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IShoppingServer_BuscarProductoNombre_InputMessage">
+    <wsdl:part name="parameters" element="tns:BuscarProductoNombre" />
+  </wsdl:message>
+  <wsdl:message name="IShoppingServer_BuscarProductoNombre_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BuscarProductoNombreResponse" />
+  </wsdl:message>
+  <wsdl:message name="IShoppingServer_CrearPedido_InputMessage">
+    <wsdl:part name="parameters" element="tns:CrearPedido" />
+  </wsdl:message>
+  <wsdl:message name="IShoppingServer_CrearPedido_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CrearPedidoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IShoppingServer_CrearUsuario_InputMessage">
+    <wsdl:part name="parameters" element="tns:CrearUsuario" />
+  </wsdl:message>
+  <wsdl:message name="IShoppingServer_CrearUsuario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CrearUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="IShoppingServer_HacerPedido_InputMessage">
+    <wsdl:part name="parameters" element="tns:HacerPedido" />
+  </wsdl:message>
+  <wsdl:message name="IShoppingServer_HacerPedido_OutputMessage">
+    <wsdl:part name="parameters" element="tns:HacerPedidoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IShoppingServer_LoginUsuario_InputMessage">
+    <wsdl:part name="parameters" element="tns:LoginUsuario" />
+  </wsdl:message>
+  <wsdl:message name="IShoppingServer_LoginUsuario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="IShoppingServer_ListarDetalle_InputMessage">
+    <wsdl:part name="parameters" element="tns:ListarDetalle" />
+  </wsdl:message>
+  <wsdl:message name="IShoppingServer_ListarDetalle_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ListarDetalleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IShoppingServer_ListarPedidos_InputMessage">
+    <wsdl:part name="parameters" element="tns:ListarPedidos" />
+  </wsdl:message>
+  <wsdl:message name="IShoppingServer_ListarPedidos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ListarPedidosResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IShoppingServer">
+    <wsdl:operation name="CrearProducto">
+      <wsdl:input wsaw:Action="http://tempuri.org/IShoppingServer/CrearProducto" message="tns:IShoppingServer_CrearProducto_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IShoppingServer/CrearProductoResponse" message="tns:IShoppingServer_CrearProducto_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BuscarProductoNombre">
+      <wsdl:input wsaw:Action="http://tempuri.org/IShoppingServer/BuscarProductoNombre" message="tns:IShoppingServer_BuscarProductoNombre_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IShoppingServer/BuscarProductoNombreResponse" message="tns:IShoppingServer_BuscarProductoNombre_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CrearPedido">
+      <wsdl:input wsaw:Action="http://tempuri.org/IShoppingServer/CrearPedido" message="tns:IShoppingServer_CrearPedido_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IShoppingServer/CrearPedidoResponse" message="tns:IShoppingServer_CrearPedido_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CrearUsuario">
+      <wsdl:input wsaw:Action="http://tempuri.org/IShoppingServer/CrearUsuario" message="tns:IShoppingServer_CrearUsuario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IShoppingServer/CrearUsuarioResponse" message="tns:IShoppingServer_CrearUsuario_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="HacerPedido">
+      <wsdl:input wsaw:Action="http://tempuri.org/IShoppingServer/HacerPedido" message="tns:IShoppingServer_HacerPedido_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IShoppingServer/HacerPedidoResponse" message="tns:IShoppingServer_HacerPedido_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LoginUsuario">
+      <wsdl:input wsaw:Action="http://tempuri.org/IShoppingServer/LoginUsuario" message="tns:IShoppingServer_LoginUsuario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IShoppingServer/LoginUsuarioResponse" message="tns:IShoppingServer_LoginUsuario_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarDetalle">
+      <wsdl:input wsaw:Action="http://tempuri.org/IShoppingServer/ListarDetalle" message="tns:IShoppingServer_ListarDetalle_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IShoppingServer/ListarDetalleResponse" message="tns:IShoppingServer_ListarDetalle_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarPedidos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IShoppingServer/ListarPedidos" message="tns:IShoppingServer_ListarPedidos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IShoppingServer/ListarPedidosResponse" message="tns:IShoppingServer_ListarPedidos_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:service name="ShoppingServer" />
+</wsdl:definitions>

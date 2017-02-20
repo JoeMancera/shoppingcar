@@ -76,6 +76,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -118,14 +120,44 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="Properties\DataSources\ShopingCar.Server.DetallePedido_.datasource" />
+    <Content Include="Properties\DataSources\ShopingCar.Server.Pedido_.datasource" />
+    <Content Include="Properties\DataSources\ShopingCar.Server.Producto_.datasource" />
+    <Content Include="Properties\DataSources\ShopingCar.Server.wsSQLResult.datasource" />
+    <None Include="Service References\ShoppingCarServer\ShoppingServer.disco" />
+    <None Include="Service References\ShoppingCarServer\configuration91.svcinfo" />
+    <None Include="Service References\ShoppingCarServer\configuration.svcinfo" />
+    <None Include="Service References\ShoppingCarServer\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Web.config" />
+    <None Include="Service References\ShoppingCarServer\ShoppingServer.wsdl" />
+    <None Include="Service References\ShoppingCarServer\ShoppingServer.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ShoppingCarServer\ShoppingServer1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ShoppingCarServer\ShoppingServer2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ShoppingCarServer\ShoppingServer3.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\ShoppingCarServer\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -142,7 +174,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -153,6 +184,9 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\ShoppingCarServer\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
