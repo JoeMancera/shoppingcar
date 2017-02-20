@@ -5,3 +5,9 @@ Crear personas
   "Clave": "123"
 }
 
+Crear pedido
+{
+  "ClienteId": "2",
+  "ProductoId": "1",
+  "Cantidad": "3"
+}

@@ -53,7 +53,22 @@ namespace ShopingCar.Server
         }
         #endregion
 
-        #region Agregar Producto al carrito
+        #region Buscar un pedido existente
+        public List<Pedido_> BuscaPedido(int id)
+        {
+            List<Pedido_> result = new List<Pedido_>();
+
+            var list = from p in BDUsuario.Pedido
+                       where p.EstadoId == 1 && p.ClienteId == id
+
+                       select new Pedido_
+                       {
+                           Id = p.Id,
+                           ClienteId = p.ClienteId
+                       };
+            int count = list.Count();
+            return list.ToList();
+        }
         #endregion
 
         #region Buscar Cliente por correo
@@ -198,31 +213,57 @@ namespace ShopingCar.Server
                     result.Exception = "No se pudo deserializar el JSON a Detalle_";
                     return result;
                 }
-
-                Pedido newOrder = new Pedido()
+                var list = BuscaPedido(objPedido.ClienteId);
+                
+                if (list.Count == 0)
                 {
-                    ClienteId = objPedido.ClienteId,
-                    FechaPedido = DateTime.Now,
-                    EstadoId = 1
-                };
+                    Pedido newOrder = new Pedido()
+                    {
+                        ClienteId = objPedido.ClienteId,
+                        FechaPedido = DateTime.Now,
+                        EstadoId = 1
+                    };
 
-                BDUsuario.Pedido.InsertOnSubmit(newOrder);
-                BDUsuario.SubmitChanges();
-                var pedidoId = newOrder.Id;
+                    BDUsuario.Pedido.InsertOnSubmit(newOrder);
+                    BDUsuario.SubmitChanges();
+                    var pedidoId = newOrder.Id;
 
-                DetallePedido newDetailOrder = new DetallePedido()
+                    DetallePedido newDetailOrder = new DetallePedido()
+                    {
+                        PedidoId = pedidoId,
+                        ProductoId = objDetalle.ProductoId,
+                        Cantidad = objDetalle.Cantidad
+                    };
+
+                    BDUsuario.DetallePedido.InsertOnSubmit(newDetailOrder);
+                    BDUsuario.SubmitChanges();
+
+                    result.WasSucceful = 1;
+                    result.Exception = "";
+                    return result;
+                }
+                else
                 {
-                    PedidoId = pedidoId,
-                    ProductoId = objDetalle.ProductoId,
-                    Cantidad = objDetalle.Cantidad
-                };
+                    int pedidoId = 0;
+                    foreach (var i in list)
+                    {
+                        pedidoId = i.Id;
+                    }
+                    DetallePedido newDetailOrder = new DetallePedido()
+                    {
+                        PedidoId = pedidoId,
+                        ProductoId = objDetalle.ProductoId,
+                        Cantidad = objDetalle.Cantidad
+                    };
 
-                BDUsuario.DetallePedido.InsertOnSubmit(newDetailOrder);
-                BDUsuario.SubmitChanges();
+                    BDUsuario.DetallePedido.InsertOnSubmit(newDetailOrder);
+                    BDUsuario.SubmitChanges();
 
-                result.WasSucceful = 1;
-                result.Exception = "";
-                return result;
+                    result.WasSucceful = 1;
+                    result.Exception = "";
+                    return result;
+                }
+                
             }
             catch (Exception e)
             {
