@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Web.Script.Serialization;
 using System.Linq;
+using System.Net.Mail;
+using System.Net;
 
 namespace ShopingCar.Server
 {
@@ -334,11 +336,17 @@ namespace ShopingCar.Server
                     .ForEach(e => e.EstadoId = 2);
 
                 BDUsuario.SubmitChanges();
+                
+                if (!SendEmail(obj.ClienteId))
+                {
+                    result.WasSucceful = 1;
+                    result.Exception = "No se envio el correo";
+                    return result;
+                } 
 
                 result.WasSucceful = 1;
                 result.Exception = "";
 
-                //enviar correo
                 return result;
             }
             catch (Exception ex)
@@ -466,6 +474,48 @@ namespace ShopingCar.Server
         #endregion
 
         #region send Email
+        public bool SendEmail(int idCliente)
+        {
+            bool sent = false;
+
+            MailMessage email = new MailMessage();
+            string correo = "";
+            var result = from p in BDUsuario.Cliente
+                         where p.Id == idCliente
+
+                         select new Cliente_
+                         {
+                             Correo = p.Correo,
+                             Clave = p.Clave
+                         };
+            
+            foreach (var c in result)
+            {
+                correo = c.Correo;
+            }
+            email.To.Add(new MailAddress(Convert.ToString(correo)));
+            email.From = new MailAddress("shoppingcar@ci2.co");
+            email.Subject = "Detalle de la compra Shopping Car";
+            email.Body = "<h1>detalle de compra<h1/>";
+            email.IsBodyHtml = true;
+            email.Priority = MailPriority.Normal;
+
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = "smtp.gmail.com";
+            smtp.Port = 587;
+            smtp.EnableSsl = true;
+            smtp.Credentials = new NetworkCredential("shoppingcarci2@gmail.com", "_ShoppingCarCi2");
+            try
+            {
+                smtp.Send(email);
+                email.Dispose();
+                return sent = true;
+            }
+            catch (Exception)
+            {
+                return sent = false;
+            }
+        }
         #endregion
 
         #region Serializer
