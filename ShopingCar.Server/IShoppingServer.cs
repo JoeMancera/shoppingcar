@@ -37,6 +37,12 @@ namespace ShopingCar.Server
         wsSQLResult CrearUsuario(Stream JSONdataStream);
         #endregion
 
+        #region Hacer pedido
+        [OperationContract]
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "/HacerPedido")]
+        wsSQLResult HacerPedido(Stream JSONdataStream);
+        #endregion
+
         #region Ingreso al aplictativo
         [OperationContract]
         [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "/LoginUsuario")]
@@ -87,6 +93,9 @@ namespace ShopingCar.Server
 
         [DataMember]
         public int ClienteId { get; set; }
+
+        [DataMember]
+        public int EstadoId { get; set; }
 
         [DataMember]
         public string FechaPedido { get; set; }
