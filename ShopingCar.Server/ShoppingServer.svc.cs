@@ -249,19 +249,55 @@ namespace ShopingCar.Server
                     {
                         pedidoId = i.Id;
                     }
-                    DetallePedido newDetailOrder = new DetallePedido()
+
+                    if (objDetalle.Cantidad != 0)
+                    {
+                        DetallePedido newDetailOrder = new DetallePedido()
+                        {
+                            PedidoId = pedidoId,
+                            ProductoId = objDetalle.ProductoId,
+                            Cantidad = objDetalle.Cantidad
+                        };
+
+                        BDUsuario.DetallePedido.InsertOnSubmit(newDetailOrder);
+                        BDUsuario.SubmitChanges();
+
+                        result.WasSucceful = 1;
+                        result.Exception = "";
+                        return result;
+                    }
+
+                    DetallePedido newDetailOrderDel = new DetallePedido()
                     {
                         PedidoId = pedidoId,
-                        ProductoId = objDetalle.ProductoId,
-                        Cantidad = objDetalle.Cantidad
+                        ProductoId = objDetalle.ProductoId
                     };
 
-                    BDUsuario.DetallePedido.InsertOnSubmit(newDetailOrder);
-                    BDUsuario.SubmitChanges();
+                    var deleteOrderDetails = from d in BDUsuario.DetallePedido
+                                             where d.PedidoId == pedidoId &&
+                                              d.ProductoId == objDetalle.ProductoId
+                                             select d;
+                    foreach (var d in deleteOrderDetails)
+                    {
+                        BDUsuario.DetallePedido.DeleteOnSubmit(d);
+                    }
 
-                    result.WasSucceful = 1;
-                    result.Exception = "";
-                    return result;
+                    try
+                    {
+                        BDUsuario.SubmitChanges();
+
+                        result.WasSucceful = 1;
+                        result.Exception = "";
+                        return result;
+                    }
+                    catch (Exception e)
+                    {
+
+                        result.WasSucceful = 0;
+                        result.Exception = e.Message;
+                        return result;
+                    }
+                                        
                 }
                 
             }
