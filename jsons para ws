@@ -11,3 +11,14 @@ Crear pedido
   "ProductoId": "1",
   "Cantidad": "3"
 }
+
+Borrar producto
+{
+  "ProductoId": "1",
+  "Cantidad": "0"
+}
+
+listar detalle
+{
+  "PedidoId": "1"
+}

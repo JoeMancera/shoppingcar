@@ -337,6 +337,8 @@ namespace ShopingCar.Server
 
                 result.WasSucceful = 1;
                 result.Exception = "";
+
+                //enviar correo
                 return result;
             }
             catch (Exception ex)
@@ -345,6 +347,64 @@ namespace ShopingCar.Server
                 result.Exception = ex.Message;
                 return result;
             }
+        }
+        #endregion
+
+        #region Listar Pedidos
+        public List<Pedido_> ListarPedidos(Stream JSONdataStream)
+        {
+            List<Pedido_> result = new List<Pedido_>();
+            StreamReader reader = new StreamReader(JSONdataStream);
+
+            string JSONdata = reader.ReadToEnd();
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            Pedido_ obj= jss.Deserialize <Pedido_ >(JSONdata);
+
+            if (obj == null)
+            {
+                return result.ToList();
+            }
+
+            var list = from p in BDUsuario.Pedido
+                       where (p.ClienteId == obj.ClienteId)
+                       select new Pedido_
+                       {
+                           Id = p.Id,
+                           EstadoId = p.EstadoId,
+                           FechaPedido = Convert.ToString(p.FechaPedido)
+                       };
+            return list.ToList();
+        }
+        #endregion
+
+        #region Listar detalle
+        public List<DetallePedido_> ListarDetalle(Stream JSONdataStream)
+        {
+            List<DetallePedido_> result = new List<DetallePedido_>();
+            StreamReader reader = new StreamReader(JSONdataStream);
+
+            string JSONdata = reader.ReadToEnd();
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            DetallePedido_ obj = jss.Deserialize<DetallePedido_>(JSONdata);
+
+            if (obj == null)
+            {
+                return result;
+            }
+
+            var list = from p in BDUsuario.DetallePedido
+                       where (p.PedidoId == obj.PedidoId)
+                       select new DetallePedido_
+                       {
+                           Producto = (from d in BDUsuario.Producto
+                                      where (d.Id == p.ProductoId)
+                                      select d.Nombre).First(),
+                           Precio = (from d in BDUsuario.Producto
+                                     where (d.Id == p.ProductoId)
+                                     select d.Precio).First(),
+                           Cantidad = p.Cantidad
+                       };
+            return list.ToList();
         }
         #endregion
 
@@ -403,6 +463,9 @@ namespace ShopingCar.Server
                 return result;
             }
         }
+        #endregion
+
+        #region send Email
         #endregion
 
         #region Serializer

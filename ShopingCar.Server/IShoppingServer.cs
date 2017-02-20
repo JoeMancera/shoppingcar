@@ -48,6 +48,18 @@ namespace ShopingCar.Server
         [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "/LoginUsuario")]
         wsSQLResult LoginUsuario(Stream JSONdataStream);
         #endregion
+
+        #region listado de pedidos
+        [OperationContract]
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "/ListarDetalle")]
+        List<DetallePedido_> ListarDetalle(Stream JSONdataStream);
+        #endregion
+
+        #region listado de pedidos
+        [OperationContract]
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "/ListarPedidos")]
+        List<Pedido_> ListarPedidos(Stream JSONdataStream);
+        #endregion
     }
 
 
@@ -79,6 +91,12 @@ namespace ShopingCar.Server
 
         [DataMember]
         public int ProductoId { get; set; }
+
+        [DataMember]
+        public string Producto { get; set; }
+
+        [DataMember]
+        public double Precio { get; set; }
 
         [DataMember]
         public int Cantidad { get; set; }
