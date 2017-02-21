@@ -1,8 +1,17 @@
+shoppingcarci2@gmail.com
+_ShoppingCarCi2
+
 Crear personas
 {
   "Nombres": "Joe Harry Mancera",
   "Correo": "joeharrymancera@gmail.com",
   "Clave": "123"
+}
+
+CrearProducto
+{
+  "Nombre": "Arduino Ethernet",
+  "Precio": "8,99"
 }
 
 Crear pedido
@@ -26,5 +35,15 @@ HacerPedido
 {
 	"ClienteId": "2"
 }
-shoppingcarci2@gmail.com
-_ShoppingCarCi2
+
+
+login
+{
+	"Correo": "joeharrymancera@gmail.com",
+	"Clave": "123"
+}
+
+BuscarProductoNombre
+{
+  "Nombre": "Ethernet"
+}
