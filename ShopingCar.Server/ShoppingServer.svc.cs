@@ -81,6 +81,7 @@ namespace ShopingCar.Server
 
                        select new Cliente_
                        {
+                           Id=p.Id,
                            Correo = p.Correo,
                            Clave = p.Clave
                        };
@@ -424,6 +425,7 @@ namespace ShopingCar.Server
             try
             {
                 string queLaClave = "";
+                int idCliente = 0;
                 StreamReader reader = new StreamReader(JSONdataStream);
 
                 string JSONdata = reader.ReadToEnd();
@@ -449,6 +451,7 @@ namespace ShopingCar.Server
                 foreach (var i in lista)
                 {
                     queLaClave = i.Clave;
+                    idCliente = i.Id;
                 }
 
                 if (queLaClave  != obj.Clave)
@@ -459,7 +462,7 @@ namespace ShopingCar.Server
                 }
                 else
                 {
-                    result.WasSucceful = 1;
+                    result.WasSucceful = idCliente;
                     result.Exception = "";
                     return result;
                 }

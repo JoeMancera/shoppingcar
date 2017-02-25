@@ -37,8 +37,17 @@ namespace ShopingCar.Web.Controllers
                         method: HttpMethod.POST,
                         postData: dataJson
                         );
-                    string respuesta = sender.MakeRequest();
-                    break;
+                    string request = sender.MakeRequest();
+                    wsRequest log_req = jss.Deserialize<wsRequest>(request);
+                    if (log_req.WasSucceful == 0)
+                    {
+                        ViewBag.Error = "Usuario y contraseña inválidos";
+                        return View();
+                    }
+                    Session["idCliente"] = log_req.WasSucceful;
+                    Session["emailCliente"] = email;
+
+                    return RedirectToAction("ListaProductos", "Productos"); 
 
                 case "Reg":
                     ws = ConfigurationManager.AppSettings["ServiceShoppingCarURL"] + "/CrearUsuario";
