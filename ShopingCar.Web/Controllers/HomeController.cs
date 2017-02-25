@@ -47,7 +47,7 @@ namespace ShopingCar.Web.Controllers
                     Session["idCliente"] = log_req.WasSucceful;
                     Session["emailCliente"] = email;
 
-                    ViewBag.Error = "Bienvenido";
+                    ViewBag.Error = "Bienvenido!";
                     return RedirectToAction("ListaProductos", "Productos"); 
 
                 case "Reg":
