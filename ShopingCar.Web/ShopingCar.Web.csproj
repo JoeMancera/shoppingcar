@@ -122,8 +122,13 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Img\ci2.png" />
+    <Content Include="Img\favicon.ico" />
+    <Content Include="Img\logo.png" />
+    <Content Include="Img\LOGOCi2.png" />
     <Content Include="Properties\DataSources\ShopingCar.Server.DetallePedido_.datasource" />
     <Content Include="Properties\DataSources\ShopingCar.Server.Pedido_.datasource" />
     <Content Include="Properties\DataSources\ShopingCar.Server.Producto_.datasource" />
@@ -165,16 +170,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="ayuda\AccountController.cs" />
-    <Compile Include="ayuda\classRestClient.cs" />
+    <Compile Include="Class\ClientService.cs" />
+    <Compile Include="Class\HttpMethod.cs" />
+    <Compile Include="Class\Login.cs" />
+    <Compile Include="Class\wsRequest.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\clientResult.cs" />
-    <Compile Include="Models\Login.cs" />
-    <Compile Include="Models\LoginServiceClient.cs" />
-    <Compile Include="Models\ProductServiceClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\ShoppingCarServer\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -197,6 +200,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ShopingCar.Server\ShopingCar.Server.csproj">
@@ -213,6 +217,9 @@
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />

@@ -1,8 +1,11 @@
-﻿using System;
+﻿using ShopingCar.Web.Class;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace ShopingCar.Web.Controllers
 {
@@ -16,10 +19,35 @@ namespace ShopingCar.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(string correo, string clave)
+        public ActionResult Index(string submitButton, string email, string username, string password)
         {
-            ShoppingCarServer.ShoppingServerClient client = new ShoppingCarServer.ShoppingServerClient();
-            
+            string ws = "";
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            switch (submitButton)
+            {
+                case "Log":
+                    ws = ConfigurationManager.AppSettings["ServiceShoppingCarURL"] + "/LoginUsuario";
+                    Login log = new Login();
+                    log.Correo = email;
+                    log.Clave = password;
+                    string dataJson = jss.Serialize(log);
+
+                    var sender = new ClientService(
+                        endpoint: ws,
+                        method: HttpMethod.POST,
+                        postData: dataJson
+                        );
+                    string respuesta = sender.MakeRequest();
+                    break;
+
+                case "Reg":
+                    ws = ConfigurationManager.AppSettings["ServiceShoppingCarURL"] + "/CrearUsuario";
+                    
+                    break;
+                default:
+                    break;
+            }
+
             return View();
         }
     }
