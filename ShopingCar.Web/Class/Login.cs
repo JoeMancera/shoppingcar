@@ -10,5 +10,6 @@ namespace ShopingCar.Web.Class
         public int Id { get; set; }
         public string Correo { get; set; }
         public string Clave { get; set; }
+        public string Nombres { get; set; }
     }
 }
