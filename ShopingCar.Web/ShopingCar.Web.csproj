@@ -129,6 +129,7 @@
     <Content Include="Img\favicon.ico" />
     <Content Include="Img\logo.png" />
     <Content Include="Img\LOGOCi2.png" />
+    <Content Include="Img\shoppingcar.png" />
     <Content Include="Properties\DataSources\ShopingCar.Server.DetallePedido_.datasource" />
     <Content Include="Properties\DataSources\ShopingCar.Server.Pedido_.datasource" />
     <Content Include="Properties\DataSources\ShopingCar.Server.Producto_.datasource" />
