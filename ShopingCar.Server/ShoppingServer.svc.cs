@@ -92,7 +92,7 @@ namespace ShopingCar.Server
         }
         #endregion
 
-        #region  Buscar Producto
+        #region  Buscar Producto Nombre
         public List<Producto_> BuscarProductoNombre(Stream JSONdataStream)
         {
             List<Producto_> result = new List<Producto_>();
@@ -131,6 +131,52 @@ namespace ShopingCar.Server
                                  Nombre = p.Nombre,
                                  Precio = p.Precio,
                              };
+                int count = list.Count();
+                return list.ToList();
+            }
+
+        }
+        #endregion
+
+        #region  Buscar Producto Id
+        public List<Producto_> BuscarProductoId(Stream JSONdataStream)
+        {
+            List<Producto_> result = new List<Producto_>();
+
+            StreamReader reader = new StreamReader(JSONdataStream);
+            string JSONdata = reader.ReadToEnd();
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            Producto_ obj = jss.Deserialize<Producto_>(JSONdata);
+
+            if (obj == null)
+            {
+                return result.ToList();
+            }
+
+            if (obj.Id != 0)
+            {
+                var list = from p in BDUsuario.Producto
+                           where (p.Id == obj.Id)
+
+                           select new Producto_
+                           {
+                               Id = p.Id,
+                               Nombre = p.Nombre,
+                               Precio = p.Precio,
+                           };
+                int count = list.Count();
+                return list.ToList();
+            }
+            else
+            {
+                var list = from p in BDUsuario.Producto
+
+                           select new Producto_
+                           {
+                               Id = p.Id,
+                               Nombre = p.Nombre,
+                               Precio = p.Precio,
+                           };
                 int count = list.Count();
                 return list.ToList();
             }
