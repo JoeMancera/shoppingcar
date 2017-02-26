@@ -99,7 +99,7 @@ namespace ShopingCar.Server
         public int ProductoId { get; set; }
 
         [DataMember]
-        public string Producto { get; set; }
+        public string NombreProducto { get; set; }
 
         [DataMember]
         public double Precio { get; set; }
