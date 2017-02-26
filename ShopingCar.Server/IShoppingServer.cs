@@ -49,7 +49,7 @@ namespace ShopingCar.Server
         wsSQLResult LoginUsuario(Stream JSONdataStream);
         #endregion
 
-        #region listado de pedidos
+        #region listado de Detalles
         [OperationContract]
         [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "/ListarDetalle")]
         List<DetallePedido_> ListarDetalle(Stream JSONdataStream);
