@@ -270,7 +270,8 @@ namespace ShopingCar.Server
                     {
                         ClienteId = objPedido.ClienteId,
                         FechaPedido = DateTime.Now,
-                        EstadoId = 1
+                        EstadoId = 1,
+                        TotalPago = 0
                     };
 
                     BDUsuario.Pedido.InsertOnSubmit(newOrder);
