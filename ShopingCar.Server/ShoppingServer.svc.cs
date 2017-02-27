@@ -106,7 +106,7 @@ namespace ShopingCar.Server
 
                        select new DetallePedido_
                        {
-                           NombreProducto = p.ProductoId.ToString(),
+                           ProductoId = p.ProductoId,
                            Cantidad = p.Cantidad
                        };
             int count = list.Count();
