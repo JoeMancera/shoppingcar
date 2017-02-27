@@ -390,7 +390,7 @@ namespace ShopingCar.Server
 
                 BDUsuario.SubmitChanges();
                 
-                if (!SendEmail(obj.ClienteId))
+                if (!SendEmail(obj.ClienteId, obj.TotalPago))
                 {
                     result.WasSucceful = 1;
                     result.Exception = "No se envio el correo";
@@ -529,7 +529,7 @@ namespace ShopingCar.Server
         #endregion
 
         #region send Email
-        public bool SendEmail(int idCliente)
+        public bool SendEmail(int idCliente, float totalPago)
         {
             bool sent = false;
 
@@ -551,7 +551,7 @@ namespace ShopingCar.Server
             email.To.Add(new MailAddress(Convert.ToString(correo)));
             email.From = new MailAddress("shoppingcar@ci2.co");
             email.Subject = "Detalle de la compra Shopping Car";
-            email.Body = "<h1>detalle de compra<h1/>";
+            email.Body = "<h1>detalle de compra<h1/> <br/> <h2> <strong>Total Compra: </strong>"+ totalPago +"</h2>";
             email.IsBodyHtml = true;
             email.Priority = MailPriority.Normal;
 
