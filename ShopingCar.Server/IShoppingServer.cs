@@ -25,7 +25,7 @@ namespace ShopingCar.Server
         List<Producto_> BuscarProductoNombre(Stream JSONdataStream);
         #endregion
 
-        #region Buscar Dettale
+        #region Buscar Detalle
         [OperationContract]
         [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "/BuscaDetalle")]
         List<DetallePedido_> BuscaDetalle(Stream JSONdataStream);
