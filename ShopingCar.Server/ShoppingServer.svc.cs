@@ -390,7 +390,7 @@ namespace ShopingCar.Server
 
                 BDUsuario.SubmitChanges();
                 
-                if (!SendEmail(obj.ClienteId, obj.TotalPago))
+                if (!SendEmail(obj.ClienteId, Convert.ToString(obj.TotalPago)))
                 {
                     result.WasSucceful = 1;
                     result.Exception = "No se envio el correo";
@@ -530,7 +530,7 @@ namespace ShopingCar.Server
         #endregion
 
         #region send Email
-        public bool SendEmail(int idCliente, float totalPago)
+        public bool SendEmail(int idCliente, string totalPago)
         {
             bool sent = false;
 
