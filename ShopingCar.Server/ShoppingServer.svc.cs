@@ -432,7 +432,8 @@ namespace ShopingCar.Server
                        {
                            Id = p.Id,
                            EstadoId = p.EstadoId,
-                           FechaPedido = Convert.ToString(p.FechaPedido)
+                           FechaPedido = Convert.ToString(p.FechaPedido),
+                           TotalPago = Convert.ToDouble(p.TotalPago)
                        };
             return list.ToList();
         }

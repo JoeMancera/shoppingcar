@@ -125,7 +125,7 @@ namespace ShopingCar.Server
         public string FechaPedido { get; set; }
 
         [DataMember]
-        public float TotalPago { get; set; }
+        public double TotalPago { get; set; }
 
     }
 
