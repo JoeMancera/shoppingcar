@@ -124,6 +124,9 @@ namespace ShopingCar.Server
         [DataMember]
         public string FechaPedido { get; set; }
 
+        [DataMember]
+        public float TotalPago { get; set; }
+
     }
 
     [DataContract]

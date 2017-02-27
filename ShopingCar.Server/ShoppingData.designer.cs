@@ -22,7 +22,7 @@ namespace ShopingCar.Server
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="ShoppingCar")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="db155992d978b348709ae8a71e00ebc16d")]
 	public partial class ShoppingDataDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -762,6 +762,8 @@ namespace ShopingCar.Server
 		
 		private System.DateTime _FechaPedido;
 		
+		private System.Nullable<double> _TotalPago;
+		
 		private EntitySet<DetallePedido> _DetallePedido;
 		
 		private EntityRef<Estado> _Estado;
@@ -780,6 +782,8 @@ namespace ShopingCar.Server
     partial void OnEstadoIdChanged();
     partial void OnFechaPedidoChanging(System.DateTime value);
     partial void OnFechaPedidoChanged();
+    partial void OnTotalPagoChanging(System.Nullable<double> value);
+    partial void OnTotalPagoChanged();
     #endregion
 		
 		public Pedido()
@@ -874,6 +878,26 @@ namespace ShopingCar.Server
 					this._FechaPedido = value;
 					this.SendPropertyChanged("FechaPedido");
 					this.OnFechaPedidoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalPago", DbType="Float")]
+		public System.Nullable<double> TotalPago
+		{
+			get
+			{
+				return this._TotalPago;
+			}
+			set
+			{
+				if ((this._TotalPago != value))
+				{
+					this.OnTotalPagoChanging(value);
+					this.SendPropertyChanging();
+					this._TotalPago = value;
+					this.SendPropertyChanged("TotalPago");
+					this.OnTotalPagoChanged();
 				}
 			}
 		}

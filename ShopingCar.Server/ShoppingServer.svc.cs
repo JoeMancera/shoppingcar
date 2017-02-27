@@ -379,8 +379,14 @@ namespace ShopingCar.Server
                 }
 
                 BDUsuario.Pedido.Where(e => e.ClienteId == obj.ClienteId)
+                    .Where(e => e.EstadoId == 1)
                     .ToList()
-                    .ForEach(e => e.EstadoId = 2);
+                    .ForEach(e => e.TotalPago = obj.TotalPago);
+
+                BDUsuario.Pedido.Where(e => e.ClienteId == obj.ClienteId)
+                    .Where(e => e.EstadoId == 1)
+                    .ToList()
+                    .ForEach(e => e.EstadoId = 2);                
 
                 BDUsuario.SubmitChanges();
                 

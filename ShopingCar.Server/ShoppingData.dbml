@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ShoppingCar" Class="ShoppingDataDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=S9S9S9S9S9\SQLEXPRESS;Initial Catalog=ShoppingCar;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="ShoppingCarConnectionString" Provider="System.Data.SqlClient" />
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="db155992d978b348709ae8a71e00ebc16d" Class="ShoppingDataDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=155992d9-78b3-4870-9ae8-a71e00ebc16d.sqlserver.sequelizer.com;Initial Catalog=db155992d978b348709ae8a71e00ebc16d;User ID=jhqetckfsllvhlns;MultipleActiveResultSets=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="ShoppingCarConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Cliente" Member="Cliente">
     <Type Name="Cliente">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -40,6 +40,7 @@
       <Column Name="ClienteId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="EstadoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="FechaPedido" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="TotalPago" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Association Name="Pedido_DetallePedido" Member="DetallePedido" ThisKey="Id" OtherKey="PedidoId" Type="DetallePedido" />
       <Association Name="Estado_Pedido" Member="Estado" ThisKey="EstadoId" OtherKey="Id" Type="Estado" IsForeignKey="true" />
       <Association Name="Cliente_Pedido" Member="Cliente" ThisKey="ClienteId" OtherKey="Id" Type="Cliente" IsForeignKey="true" />
