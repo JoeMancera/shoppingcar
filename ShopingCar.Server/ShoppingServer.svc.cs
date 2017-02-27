@@ -13,7 +13,9 @@ namespace ShopingCar.Server
     public class ShoppingServer : IShoppingServer
     {
         ShoppingDataDataContext BDUsuario = new ShoppingDataDataContext();
-        private IQueryable<DetallePedido_> listP;
+
+        public IQueryable<DetallePedido_> listP { get; private set; }
+
 
         #region Agregra Producto DB
         public wsSQLResult CrearProducto(Stream JSONdataStream)
@@ -106,22 +108,14 @@ namespace ShopingCar.Server
 
                        select new DetallePedido_
                        {
-                           ProductoId = p.ProductoId,
+                           NombreProducto = (from i in BDUsuario.Producto
+                                             where i.Id == p.ProductoId
+                                             select i.Nombre).First().ToString(),
                            Cantidad = p.Cantidad
                        };
-            int count = list.Count();
-            foreach (var item in list)
-            {
-                listP = from p in BDUsuario.Producto
-                       where p.Id == item.ProductoId
-
-                       select new DetallePedido_
-                       {
-                           NombreProducto = p.Nombre,
-                           Cantidad = item.Cantidad
-                       };
-            }
-            return listP.ToList();
+            
+            
+            return list.ToList();
         }
         #endregion
 
