@@ -92,6 +92,27 @@ namespace ShopingCar.Server
         }
         #endregion
 
+        #region Buscar un pedido existente
+        public List<DetallePedido_> BuscaDetalle(Stream JSONdataStream)
+        {
+            StreamReader reader = new StreamReader(JSONdataStream);
+            string JSONdata = reader.ReadToEnd();
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            DetallePedido_ obj = jss.Deserialize<DetallePedido_>(JSONdata);
+
+            var list = from p in BDUsuario.DetallePedido
+                       where p.PedidoId == obj.PedidoId
+
+                       select new DetallePedido_
+                       {
+                           NombreProducto = p.Producto.ToString(),
+                           Cantidad = p.Cantidad
+                       };
+            int count = list.Count();
+            return list.ToList();
+        }
+        #endregion
+
         #region  Buscar Producto Nombre
         public List<Producto_> BuscarProductoNombre(Stream JSONdataStream)
         {
