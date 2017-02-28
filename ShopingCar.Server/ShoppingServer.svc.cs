@@ -486,6 +486,9 @@ namespace ShopingCar.Server
                        where (p.PedidoId == obj.PedidoId)
                        select new DetallePedido_
                        {
+                           ProductoId = (from d in BDUsuario.Producto
+                                             where (d.Id == p.ProductoId)
+                                             select d.Id).First(),
                            NombreProducto = (from d in BDUsuario.Producto
                                       where (d.Id == p.ProductoId)
                                       select d.Nombre).First(),
